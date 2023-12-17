@@ -1,0 +1,118 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height:100vh;
+    background: url("https://us.123rf.com/450wm/liudmilachernetska/liudmilachernetska2307/liudmilachernetska230725450/208085094-empty-shopping-trolley-on-color-background-top-view-space-for-text.jpg?ver=6") no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.wrapper{
+    width: 420px;
+    background: transparent;
+    border: 2px solid CornflowerBlue;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px black;
+
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+
+}
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+.wrapper .remember-forgot{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: -15px 0 15px;
+
+}
+.remember-forgot label input{
+    accent-color: #fff;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+.remember-forgot a:hover{
+    text-decoration: underline;
+}
+.wrapper .btn{
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px black;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight:600 ;
+}
+
+.wrapper .register-link{
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+.register-link{
+    color: white;
+    text-decoration:none ;
+    font-weight: 600;
+}
+.register-link a{
+    color: Black;
+    text-decoration:none ;
+}
+.register-link p a:hover{
+    text-decoration: underline;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
+    <div class="wrapper">
+        <form method="POST">
+            <h1>Sign In</h1>
+            {{form|crispy}}
+            <div class="remember-forgot">
+                <label >
+                    <input type="checkbox"> Remember me
+                </label>
+            </div>
+            <button type="submit" class="btn">Sign In</button>
+            <div class="register-link">
+                <p>Akkauntingiz Bormi: <a href="{% url 'login' %}">Log In</a></p>
+
+            </div>
+        </form>
+    </div>
+</form>
+</body>
+</html>
+{% endblock content %}
