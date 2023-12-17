@@ -26,3 +26,14 @@ def show(request, task_id):
     if request.method == 'POST':
         return redirect('index')
     return render(request, 'api/show.html', {'task': task})
+
+
+def adding_answer(request):
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = AnswerForm()
+    return render(request, 'api/new.html', {'form': form})
