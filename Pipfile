@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 django = "==4.2"
 djangorestframework = "*"
+pillow = "*"
+crispy-bootstrap5 = "*"
 
 [dev-packages]
 
