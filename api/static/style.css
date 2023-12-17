@@ -1,6 +1,7 @@
 body{
   margin:20px;
   font-family: Helvetica, Arial, sans-serif;
+  color:red;
 }
 .pull-right{
   float:right;

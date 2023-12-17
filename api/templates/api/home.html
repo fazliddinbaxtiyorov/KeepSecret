@@ -1,10 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'api/base.html' %}
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+
+<a class="btn btn-info" href="{% url 'post_new' %}" role="button" >Add New Question</a>
+<div class="container">
+		<div class="col-md-12" id="fbcomment">
+			<div class="header_comment">
+				<div class="row">
+					<div class="col-md-6 text-left">
+					</div>
+				</div>
+			</div>
+				<div class="row">
+					<ul id="list_comment" class="col-md-12">
+						{% for post in posts %}
+						<li class="box_result row">
+							<div class="avatar_comment col-md-1">
+								<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+							</div>
+							<div class="result_comment col-md-11">
+								<h4>{{ post.user }}</h4>
+								<p>{{ post.question_text|truncatewords:10 }}</p>
+								<div class="tools_comment">
+									<a class="like" href="#">Like {{ post.like }}</a>
+									<a class="replay" href="#">Comment {{ post.comment }}</a>
+									<span>{{ post.date  }}</span>
+								</div>
+								<div class="body_comment">
+				<div class="row">
+					<div class="avatar_comment col-md-1">
+					  <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+					</div>
+					<div class="box_comment col-md-11">
+					  <textarea class="commentar" placeholder="Add a comment..."></textarea>
+					  <div class="box_post">
+						<div class="pull-left">
+						</div>
+						<div class="pull-right">
+						  <span>
+							<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
+							<i class="fa fa-caret-down"></i>
+						  </span>
+						  <button onclick="submit_comment()" type="button" value="1">Post</button>
+						</div>
+					  </div>
+					</div>
+				</div>
+						{% endfor %}
+
+{% endblock %}
+
