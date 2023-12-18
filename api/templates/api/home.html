@@ -37,8 +37,8 @@
 					<div class="avatar_comment col-md-1">
 						{% for i in answer  %}
 							{% if post == i.quests_text %}
-								<h2><img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>{{ i.user }}</h2>
-								<h5>{{ i.answer_text }}</h5>
+								<h2><img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>  {{ i.user }}</h2>
+								<h4>{{ i.answer_text }}</h4><h6>{{ i.date }}</h6>
 							{% endif %}
 						{% endfor %}
 					</div>
