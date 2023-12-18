@@ -1,9 +1,14 @@
 {% extends 'api/base.html' %}
 {% load static %}
 {% block content %}
-  <link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'style.css' %}">
 
 <a class="btn btn-info" href="{% url 'post_new' %}" role="button" >Add New Question</a>
+<form action="{% url 'search' %}" method="GET">
+                  {% csrf_token %}
+        <input class="search" style="height:36px;width:400px;text-align:center;margin:20px 14px;margin-left:390px;border-radius:8px;" type="text" name="q" placeholder="Hashtag orqali qidiruv">
+  <button class="btn btn-success"  style="height:40px;width:110px;margin-bottom:5px;" type="submit">Search</button>
+      </form>
 <div class="container">
 		<div class="col-md-12" id="fbcomment">
 			<div class="header_comment">
@@ -20,7 +25,7 @@
 								<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
 							</div>
 							<div class="result_comment col-md-11">
-								<h4>{{ post.user }}</h4>
+								<a href="{% url 'detail' post.id %}"><h2>{{ post.user }}</h2></a>
 								<p>{{ post.question_text|truncatewords:10 }}</p>
 								<div class="tools_comment">
 									<a class="like" href="#">Like {{ post.like }}</a>
@@ -30,21 +35,14 @@
 								<div class="body_comment">
 				<div class="row">
 					<div class="avatar_comment col-md-1">
-					  <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+						{% for i in answer  %}
+							{% if post == i.quests_text %}
+								<h2><img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>{{ i.user }}</h2>
+								<h5>{{ i.answer_text }}</h5>
+							{% endif %}
+						{% endfor %}
 					</div>
-					<div class="box_comment col-md-11">
-						<a class="btn btn-info" href="{% url 'new' %}" role="button" >Add New Question</a>
-					  <div class="box_post">
-						<div class="pull-left">
-						</div>
-						<div class="pull-right">
-						  <span>
-						  </span>
-						</div>
-					  </div>
-					</div>
-				</div>
+
 						{% endfor %}
 
 {% endblock %}
-
