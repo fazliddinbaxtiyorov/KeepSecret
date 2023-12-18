@@ -30,3 +30,25 @@ class QuestionDetail(DetailView):
     context_object_name = 'detail'
 
 
+def add_comment(request, pk):
+    question = Question.objects.get(id=pk)
+    comments = Answer.objects.filter(quests_text=question)
+    if request.method == 'POST':
+        form = AnswerForm(request.POST, instance=question)
+        if form.is_valid():
+            name = request.user
+            body = form.cleaned_data['answer_text']
+            data = Answer(quests_text=question, user=name, answer_text=body, date=datetime.now())
+            data.save()
+            question.comment = comments.count()
+            question.save()
+            return redirect('home')
+        else:
+            print('form is invalid')
+    else:
+        form = AnswerForm()
+
+    return render(request, 'api/new.html', {'form': form})
+
+
+
