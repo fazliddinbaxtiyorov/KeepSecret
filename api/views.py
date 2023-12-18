@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Question, Answer
@@ -7,12 +7,14 @@ from .forms import QuestionForm, AnswerForm
 from django.db.models import Q
 
 
+@login_required
 def PostListView(request):
     quest = Question.objects.all().order_by('-date')
     answer = Answer.objects.all().order_by('-date')
     return render(request, 'api/home.html', {'posts': quest, 'answer': answer})
 
 
+@login_required
 def adding_question(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
@@ -24,12 +26,14 @@ def adding_question(request):
     return render(request, 'api/add.html', {'form': form})
 
 
+@login_required
 class QuestionDetail(DetailView):
     model = Question
     template_name = 'api/detail.html'
     context_object_name = 'detail'
 
 
+@login_required
 def add_comment(request, pk):
     question = Question.objects.get(id=pk)
     comments = Answer.objects.filter(quests_text=question)
@@ -51,6 +55,7 @@ def add_comment(request, pk):
     return render(request, 'api/new.html', {'form': form})
 
 
+@login_required
 def search(request):
     query = request.GET.get('q')
     page_search = Question.objects.filter(Q(hashtag__icontains=query))
