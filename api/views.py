@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.shortcuts import redirect, render
+from django.views.generic import DetailView
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
 from django.db.models import Q
