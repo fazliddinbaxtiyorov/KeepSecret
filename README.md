@@ -1,4 +1,4 @@
-## Keep Secret App Django-Rest-Framework
+## Keep Secret App Django
 
 **Yuklab Olish**
 ```
