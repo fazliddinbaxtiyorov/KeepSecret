@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'api/base.html' %}
+{% block heading %}
+{% endblock heading %}
+{% block content %}
+<style>
+     * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+            }
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height:100vh;
+                background: url("https://www.mixedinamerica.org/wp-content/uploads/2018/08/image-background-color-5.jpg") no-repeat;
+                background-size: cover;
+                background-position: center;
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+<a style="height:60px;width:200px;box-shadow: 2px 2px 3px white" class="btn btn-primary" href="{% url 'new' detail.id %}"><h4>Add Comment</h4></a>
+{% endblock content %}
