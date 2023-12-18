@@ -1,13 +1,16 @@
+from datetime import datetime
+
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
+from django.db.models import Q
 
 
-class PostListView(ListView):
-    model = Question
-    template_name = 'api/home.html'
-    context_object_name = 'posts'
+def PostListView(request):
+    quest = Question.objects.all().order_by('-date')
+    answer = Answer.objects.all().order_by('-date')
+    return render(request, 'api/home.html', {'posts': quest, 'answer': answer})
 
 
 def adding_question(request):
@@ -21,19 +24,35 @@ def adding_question(request):
     return render(request, 'api/add.html', {'form': form})
 
 
-def show(request, task_id):
-    task = get_object_or_404(Question, id=task_id)
-    if request.method == 'POST':
-        return redirect('index')
-    return render(request, 'api/show.html', {'task': task})
+class QuestionDetail(DetailView):
+    model = Question
+    template_name = 'api/detail.html'
+    context_object_name = 'detail'
 
 
-def adding_answer(request):
+def add_comment(request, pk):
+    question = Question.objects.get(id=pk)
+    comments = Answer.objects.filter(quests_text=question)
     if request.method == 'POST':
-        form = AnswerForm(request.POST)
+        form = AnswerForm(request.POST, instance=question)
         if form.is_valid():
-            form.save()
+            name = request.user
+            body = form.cleaned_data['answer_text']
+            data = Answer(quests_text=question, user=name, answer_text=body, date=datetime.now())
+            data.save()
+            question.comment = comments.count()
+            question.save()
             return redirect('home')
+        else:
+            print('form is invalid')
     else:
         form = AnswerForm()
+
     return render(request, 'api/new.html', {'form': form})
+
+
+def search(request):
+    query = request.GET.get('q')
+    page_search = Question.objects.filter(Q(hashtag__icontains=query))
+
+    return render(request, 'api/search.html', {'search': page_search})
