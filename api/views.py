@@ -51,4 +51,8 @@ def add_comment(request, pk):
     return render(request, 'api/new.html', {'form': form})
 
 
+def search(request):
+    query = request.GET.get('q')
+    page_search = Question.objects.filter(Q(hashtag__icontains=query))
 
+    return render(request, 'api/search.html', {'search': page_search})
