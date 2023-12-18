@@ -1,13 +1,16 @@
+from datetime import datetime
+
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
+from django.db.models import Q
 
 
-class PostListView(ListView):
-    model = Question
-    template_name = 'api/home.html'
-    context_object_name = 'posts'
+def PostListView(request):
+    quest = Question.objects.all().order_by('-date')
+    answer = Answer.objects.all().order_by('-date')
+    return render(request, 'api/home.html', {'posts': quest, 'answer': answer})
 
 
 def adding_question(request):
@@ -21,19 +24,9 @@ def adding_question(request):
     return render(request, 'api/add.html', {'form': form})
 
 
-def show(request, task_id):
-    task = get_object_or_404(Question, id=task_id)
-    if request.method == 'POST':
-        return redirect('index')
-    return render(request, 'api/show.html', {'task': task})
+class QuestionDetail(DetailView):
+    model = Question
+    template_name = 'api/detail.html'
+    context_object_name = 'detail'
 
 
-def adding_answer(request):
-    if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = AnswerForm()
-    return render(request, 'api/new.html', {'form': form})
