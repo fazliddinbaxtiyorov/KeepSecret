@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import DetailView
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
@@ -36,7 +37,7 @@ def add_comment(request, pk):
     if request.method == 'POST':
         form = AnswerForm(request.POST, instance=question)
         if form.is_valid():
-            name = request.user
+            name = form.cleaned_data['user']
             body = form.cleaned_data['answer_text']
             data = Answer(quests_text=question, user=name, answer_text=body, date=datetime.now())
             data.save()
@@ -56,3 +57,9 @@ def search(request):
     page_search = Question.objects.filter(Q(hashtag__icontains=query))
 
     return render(request, 'api/search.html', {'search': page_search})
+
+
+def LikeView(request, pk):
+    tweet = get_object_or_404(Question, id=pk)
+    tweet.like.add(request.user)
+    return HttpResponseRedirect('home')
