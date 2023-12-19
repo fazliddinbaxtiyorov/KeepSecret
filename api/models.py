@@ -7,7 +7,7 @@ class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     question_text = models.TextField(unique=True)
     date = models.DateTimeField(auto_now_add=True)
-    like = models.ManyToManyField(User, related_name='like')
+    like = models.IntegerField(default=0)
     comment = models.IntegerField(default=0)
     hashtag = models.CharField(max_length=255)
 
