@@ -24,4 +24,7 @@ python manage.py runserver
 5. http://127.0.0.1:8000/profile
 6. http://127.0.0.1:8000/new_question
 7. http://127.0.0.1:8000/new_answer
+8. http://127.0.0.1:8000/detail/<int:pk>/
+9. http://127.0.0.1:8000/search/
+10. http://127.0.0.1:8000/migration
 
