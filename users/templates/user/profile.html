@@ -57,7 +57,7 @@
            {% if user.is_authenticated %}
                 <div class="wrapper">
                 {% csrf_token %}
-                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="default image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="default image">
                     <p>Name: {{ user|upper }}</p>
                     <a href="{% url 'logout' %} " class="logout btn btn-danger">Log Out</a>
 

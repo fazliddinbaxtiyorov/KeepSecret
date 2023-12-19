@@ -3,7 +3,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <div class="all">
    {% for i in search %}
-  <h3 class="title">{{i.user}}</h3>
+    <h2><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar"/>  {{ i.user }}</h2>
    <h6 class="cost" >{{ i.question_text }}</h6>
    {% endfor %}
 </div>
