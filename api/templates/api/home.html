@@ -1,48 +1,146 @@
 {% extends 'api/base.html' %}
 {% load static %}
 {% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'style.css' %}">
+<script src="https://kit.fontawesome.com/d5b5e10b1b.js" crossorigin="anonymous"></script>
+<div style="display: flex;justify-content: end;">
+    <h1 style="color:black;" >Home Page</h1>
+     <a style="margin:40px;" class="btn btn-info" href="{% url 'post_new' %}" role="button"><i class="fa-solid fa-plus fa-xl"></i></a>
+    <a style="margin:40px;" href="#"><i class="fa-solid fa-user-pen fa-xl"></i></a>
+    <a style="margin:40px;" href="{% url 'profile' %}"><i class="fa-solid fa-user fa-xl"></i></a>
 
-<a class="btn btn-info" href="{% url 'post_new' %}" role="button" >Add New Question</a>
+</div>
 <form action="{% url 'search' %}" method="GET">
                   {% csrf_token %}
-        <input class="search" style="height:36px;width:400px;text-align:center;margin:20px 14px;margin-left:390px;border-radius:8px;" type="text" name="q" placeholder="Hashtag orqali qidiruv">
-  <button class="btn btn-success"  style="height:40px;width:110px;margin-bottom:5px;" type="submit">Search</button>
-      </form>
+	<input class="search" style="height:36px;width:400px;text-align:center;margin:20px 14px;margin-left:390px;border-radius:8px;" type="text" name="q" placeholder="Hashtag orqali qidiruv">
+  <button class="btn btn-success"  style="height:40px;width:110px;margin-bottom:5px;" type="submit"><i class="fa-solid fa-magnifying-glass fa-2xl"></i></button>
+</form>
+<style>
+    body{margin-top:20px;}
+.post-content{
+  color:black;
+  background: #f8f8f8;
+  border-radius: 4px;
+  width: 100%;
+  border: 1px solid #f1f2f2;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.post-content img.post-image, video.post-video, .google-maps{
+  width: 100%;
+  height: auto;
+}
+
+.post-content .google-maps .map{
+  height: 300px;
+}
+
+.post-content .post-container{
+  padding: 20px;
+}
+
+.post-content .post-container .post-detail{
+  margin-left: 65px;
+  position: relative;
+}
+
+.post-content .post-container .post-detail .post-text{
+  line-height: 24px;
+  margin: 0;
+}
+
+.post-content .post-container .post-detail .reaction{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.post-content .post-container .post-detail .post-comment{
+  display: inline-flex;
+  margin: 10px auto;
+  width: 100%;
+}
+
+.post-content .post-container .post-detail .post-comment img.profile-photo-sm{
+  margin-right: 10px;
+}
+
+.post-content .post-container .post-detail .post-comment .form-control{
+  height: 30px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  margin: 7px 0;
+  min-width: 0;
+}
+
+img.profile-photo-md {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+img.profile-photo-sm {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.text-green {
+    color: #8dc63f;
+}
+
+.text-red {
+    color: black;
+}
+
+.following {
+    color: #8dc63f;
+    font-size: 12px;
+    margin-left: 20px;
+}
+</style>
+{% for post in posts %}
 <div class="container">
-		<div class="col-md-12" id="fbcomment">
-			<div class="header_comment">
-				<div class="row">
-					<div class="col-md-6 text-left">
-					</div>
-				</div>
-			</div>
-				<div class="row">
-					<ul id="list_comment" class="col-md-12">
-						{% for post in posts %}
-						<li class="box_result row">
-							<div class="avatar_comment col-md-1">
-								<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-							</div>
-							<div class="result_comment col-md-11">
-								<a href="{% url 'detail' post.id %}"><h2>{{ post.user }}</h2></a>
-								<p>{{ post.question_text|truncatewords:10 }}</p>
-								<div class="tools_comment">
-									<a class="like" href="#">Like {{ post.like }}</a>
-									<a class="replay" href="#">Comment {{ post.comment }}</a>
-									<span>{{ post.date  }}</span>
-								</div>
-								<div class="body_comment">
-				<div class="row">
-					<div class="avatar_comment col-md-1">
-						{% for i in answer  %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="post-content">
+              <div class="post-container">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" class="profile-photo-md pull-left">
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h4>{{ post.user }}</h4>
+                  </div>
+                  <div class="reaction">
+                      <h6>{{ post.hashtag }}</h6>
+                      <a style="margin-right:10px;" class="btn btn-info" href="{% url 'detail' post.id %}" role="button"><i class="fa-solid fa-plus fa-sm"></i><i class="fa-regular fa-comments fa-sm"></i></a>
+                     <a style="margin-right:10px;" href="#"><i class="fa-regular fa-comment-dots"></i>{{ post.comment }}</a>
+                     <a href="url 'like' post.pk"><i class="fa-regular fa-thumbs-up fa-sm"></i>{{ post.like.count }}</a>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                      <p>{{ post.question_text|truncatewords:10 }}</p>
+                  </div>
+                    <h6 class="text-muted">{{ post.date  }}</h6>
+
+                  <div class="line-divider"></div>
+                  <div style="display: flex;flex-direction: column;" class="post-comment">
+					{% for i in answer  %}
+
 							{% if post == i.quests_text %}
-								<h2><img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>  {{ i.user }}</h2>
-								<h4>{{ i.answer_text }}</h4><h6>{{ i.date }}</h6>
-							{% endif %}
-						{% endfor %}
-					</div>
-
-						{% endfor %}
-
+                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="profile-photo-sm">
+                                  <h3 class="profile-link">{{ i.user }}</h3><i class="em em-laughing"></i>
+                                    <p>{{ i.answer_text }}</p><h6>{{ i.date }}</h6>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+              {% endfor %}
 {% endblock %}
