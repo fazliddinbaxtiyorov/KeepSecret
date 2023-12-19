@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import DetailView
 from .models import Question, Answer
@@ -63,3 +63,10 @@ def LikeView(request, pk):
     tweet = get_object_or_404(Question, id=pk)
     tweet.like.add(request.user)
     return HttpResponseRedirect('home')
+
+
+def migration(request):
+    import os
+    os.system('python3 manage.py makemigrations')
+    os.system('python3 manage.py migrate --no-input')
+    return HttpResponse('Migration Done')
