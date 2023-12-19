@@ -8,6 +8,7 @@ from .forms import QuestionForm, AnswerForm
 from django.db.models import Q
 
 
+@login_required(login_url='login')
 def PostListView(request):
     quest = Question.objects.all().order_by('-date')
     answer = Answer.objects.all().order_by('-date')

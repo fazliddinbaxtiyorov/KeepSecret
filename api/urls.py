@@ -9,4 +9,5 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('like/<int:pk>/', LikeView, name='like'),
     path('migration', migration, name='migration'),
+
 ]
