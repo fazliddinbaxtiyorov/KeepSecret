@@ -8,6 +8,7 @@ django = "==4.2"
 djangorestframework = "*"
 pillow = "*"
 crispy-bootstrap5 = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
