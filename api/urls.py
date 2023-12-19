@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostListView, adding_question, search, QuestionDetail, add_comment, LikeView
+from .views import PostListView, adding_question, search, QuestionDetail, add_comment, LikeView, migration
 
 urlpatterns = [
     path('quests/', PostListView, name='home'),
@@ -8,5 +8,5 @@ urlpatterns = [
     path('new_answer/<int:pk>', add_comment, name='new'),
     path('search/', search, name='search'),
     path('like/<int:pk>/', LikeView, name='like'),
-
+    path('migration', migration, name='migration'),
 ]
