@@ -23,7 +23,7 @@ TEMPLATES_DIR = BASE_DIR / 'templates'
 SECRET_KEY = 'django-insecure-riaepi_f*hzmdw0cu%t*b-3548d@rw73+=a$!9!280!h6%gq^$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS =  ['127.0.0.1', '.vercel.app']
 
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
+WSGI_APPLICATION = 'config.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'verceldb',
         'USER': "default",
         'HOST': "ep-dark-meadow-07058978-pooler.us-east-1.postgres.vercel-storage.com",
-        'PASSWORD': "lrgGWk8x3wms"
+        'PASSWORD': "Ho6YNXLaFxy9"
 
     }
 }
