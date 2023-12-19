@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'verceldb',
         'USER': "default",
         'HOST': "ep-dark-meadow-07058978-pooler.us-east-1.postgres.vercel-storage.com",
-        'PASSWORD': "lrgGWk8x3wms"
+        'PASSWORD': "Ho6YNXLaFxy9"
 
     }
 }
