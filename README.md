@@ -27,4 +27,5 @@ python manage.py runserver
 8. http://127.0.0.1:8000/detail/<int:pk>/
 9. http://127.0.0.1:8000/search/
 10. http://127.0.0.1:8000/migration
+11. http://127.0.0.1:8000/
 
