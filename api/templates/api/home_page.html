@@ -1,0 +1,10 @@
+<h1 style="color:Chartreuse;display:flex;justify-content:center;margin:40px;" >Welcome To Chat Group !</h1>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+<h4 style="color:blue;display:flex;justify-content:center;margin:20px;">You need to register</h4>
+<a style="display:flex;justify-content:center;" href="{% url 'sign' %}"><button style="height:60px;width:100px;" class="btn btn-info" type="submit">SignUp</button></a>
+<h4 style="color:green;display:flex;justify-content:center;margin:10px;">If you are registered, You Login your Account!</h4>
+<a style="display:flex;justify-content:center;margin:30px;" href="{% url 'login' %}"><button style="height:60px;width:100px;" class="btn btn-success" type="submit">Login</button></a>
+<h4 style="color:DarkSlateBlue;display:flex;justify-content:center;margin:10px;">This Url will send you to Home Page</h4>
+<a style="display:flex;justify-content:center;margin:30px;" href="{% url 'login' %}"><button style="height:60px;width:100px;" class="btn btn-primary" type="submit">Go On Home Page</button></a>

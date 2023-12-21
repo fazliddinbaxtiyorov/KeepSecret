@@ -19,7 +19,7 @@ def register(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Your account has been registered.')
-                return redirect('/')
+                return redirect('home')
             else:
                 messages.error(request, 'Failed to authenticate user.')
         else:
