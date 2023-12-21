@@ -8,6 +8,10 @@ from .forms import QuestionForm, AnswerForm
 from django.db.models import Q
 
 
+def home_page(request):
+    return render(request, 'api/home_page.html')
+
+
 @login_required(login_url='login')
 def PostListView(request):
     quest = Question.objects.all().order_by('-date')
@@ -19,7 +23,14 @@ def adding_question(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
-            form.save()
+            data = form.save(commit=False)
+            name = request.user
+            like = 0
+            comment = 0
+            text = form.cleaned_data['question_text']
+            hashtag = form.cleaned_data['hashtag']
+            data = Question(question_text=text, user=name, like=like, comment=comment, hashtag=hashtag, date=datetime.now())
+            data.save()
             return redirect('home')
     else:
         form = QuestionForm()
@@ -38,15 +49,13 @@ def add_comment(request, pk):
     if request.method == 'POST':
         form = AnswerForm(request.POST, instance=question)
         if form.is_valid():
-            name = form.cleaned_data['user']
+            name = request.user
             body = form.cleaned_data['answer_text']
             data = Answer(quests_text=question, user=name, answer_text=body, date=datetime.now())
             data.save()
             question.comment = comments.count()
             question.save()
             return redirect('home')
-        else:
-            print('form is invalid')
     else:
         form = AnswerForm()
 
